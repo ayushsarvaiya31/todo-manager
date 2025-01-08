@@ -12,7 +12,8 @@ class TodoList:
             print("3. Load Todos from File")
             print("4. Mark Todo as Done")
             print("5. Display Todos")
-            print("6. Exit")
+            print("6. Delete Todos")
+            print("7. Exit")
             
             try:
                 choice = int(input("Enter your choice: "))
@@ -26,7 +27,9 @@ class TodoList:
                     self.mark_todo()
                 elif choice == 5:
                     self.display()
-                elif choice == 6:
+                elif choice==6:
+                    self.delete_todo()
+                elif choice == 7:
                     print("Exiting program.")
                     break
                 else:
@@ -87,6 +90,21 @@ class TodoList:
             if 1 <= index <= len(self.todos):
                 self.todos[index - 1]["Status"] = True
                 print("Task marked as done.")
+            else:
+                print("Invalid task number.")
+        except ValueError:
+            print("Please enter a valid number.")
+            
+    def delete_todo(self):
+        if not self.todos:
+            print("No tasks to delete.")
+            return
+        self.display()
+        try:
+            index = int(input("Enter the task number to delete: "))
+            if 1 <= index <= len(self.todos):
+                del self.todos[index - 1]
+                print("Task deleted successfully.")
             else:
                 print("Invalid task number.")
         except ValueError:
